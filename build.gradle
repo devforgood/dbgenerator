@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+    id 'idea'
+}
+
+apply plugin: 'jacoco'
+
+group 'org.denny'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation group: 'org.eclipse.persistence', name: 'javax.persistence', version: '2.2.1'
+    testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+
+}
+
+test {
+    useJUnitPlatform()
+}
