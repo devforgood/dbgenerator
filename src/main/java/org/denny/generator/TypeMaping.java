@@ -28,7 +28,7 @@ public class TypeMaping {
         typeMap.put("DECIMAL", "java.math.BigDecimal");
         typeMap.put("DATE", "java.sql.Date");
         typeMap.put("DATETIME", "java.sql.Timestamp");
-        typeMap.put("TIMESTAMP", "java.util.Date");
+        typeMap.put("TIMESTAMP", "java.time.Instant");
         typeMap.put("TIME", "java.sql.Time");
         typeMap.put("YEAR[(2|4)]", "java.sql.Date");
         typeMap.put("BINARY", "byte[]");

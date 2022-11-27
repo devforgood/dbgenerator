@@ -17,7 +17,7 @@ public class Main {
         try {
             Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.137.10?serverTimezone=UTC","testuser","test1234");
             var st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SHOW CREATE TABLE game.t_building"); // ResultSet은 쿼리문을 보낸후 나온 결과를 가져올 때 사용한다.
+            ResultSet rs = st.executeQuery("SHOW CREATE TABLE game.player_reputation"); // ResultSet은 쿼리문을 보낸후 나온 결과를 가져올 때 사용한다.
 
             while(rs.next()) {
                 var str = rs.getString("Create Table");
@@ -25,6 +25,11 @@ public class Main {
 
                 TableObject tableObject = TableConvert.convertToTableObject(str);
                 ClassObject classObject = ClassConvert.convertToClassObject(tableObject);
+
+                var out = new GeneratorDatabaseModel().formatPOJOString(classObject);
+                System.out.println(out);
+
+
 
             }
         }catch (Exception e){
