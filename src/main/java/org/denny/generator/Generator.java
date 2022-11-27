@@ -7,7 +7,7 @@ import org.denny.generator.object.java.MemberObject;
 
 import java.util.*;
 
-public class GeneratorDatabaseModel {
+public class Generator {
 
     public String formatPOJOString(ClassObject classObject) {
 
@@ -96,18 +96,25 @@ public class GeneratorDatabaseModel {
         classObject.getMemberObjectList().forEach(memberObject -> {
             stringBuilder.append(formatMenber(memberObject));
         });
-//        //Getter And Settter
-//        classObject.getMemberObjectList().forEach(memberObject -> {
-//            stringBuilder.append(formatGetterAndSetter(memberObject));
-//        });
-//        //default constructor
-//        stringBuilder.append(formatConstructor(classObject));
+        //Getter And Settter
+        classObject.getMemberObjectList().forEach(memberObject -> {
+            stringBuilder.append(formatGetterAndSetter(memberObject));
+        });
+        //default constructor
+        stringBuilder.append(formatConstructor(classObject));
         return stringBuilder;
     }
 
     private String formatMenber(MemberObject memberObject) {
         return String.format(
-                        "\n\tpublic %s %s;"
+                "\n\t/**" +
+                        "\n\t * %s" +
+                        "\n\t */" +
+                        "%s" +
+                        "\n\tprivate %s %s;" +
+                        "\n"
+                , memberObject.getComment()
+                , formatMemberAnnotation(memberObject.getAnnotationList())
                 , getMemberType(memberObject)
                 , memberObject.getName()
         );

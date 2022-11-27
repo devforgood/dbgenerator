@@ -5,6 +5,8 @@ public class ColumnObject {
     private String type;
     private Boolean allowNull;
     private Boolean identity;
+
+    private Boolean unique;
     private Boolean autoIncrement;
     private String defaultStr;
     private String comment;
@@ -39,6 +41,12 @@ public class ColumnObject {
 
     public void setIdentity(Boolean identity) {
         this.identity = identity;
+    }
+
+    public  Boolean getUnique()  { return  unique; }
+
+    public void setUnique(Boolean unique) {
+        this.unique = unique;
     }
 
     public Boolean getAutoIncrement() {

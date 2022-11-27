@@ -33,6 +33,15 @@ public class TableConvert {
             columnObject.setIdentity(true);
         }
 
+        var uniqueKey = getUniqueKey(ddlString);
+        if (uniqueKey != null && uniqueKey.length > 0) {
+            for(int i=0;i<uniqueKey.length;++i) {
+                ColumnObject columnObject = map.get(uniqueKey[i]);
+                columnObject.setUnique(true);
+            }
+        }
+
+
         TableObject tableObject = new TableObject();
         tableObject.setName(org.denny.generator.convert.sql.TableConvert.getTableName(ddlString));
         tableObject.setComment(org.denny.generator.convert.sql.TableConvert.getTableComment(ddlString));
@@ -103,6 +112,17 @@ public class TableConvert {
         Matcher m = r.matcher(str);
         if (m.find()) {
             return m.group(1).trim();
+        }
+        return null;
+    }
+
+    private static String[] getUniqueKey(String str) {
+        String pattern = ",\\n *UNIQUE KEY `\\S*` \\(`(\\S*)`\\)";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(str);
+        if (m.find()) {
+            var key = m.group(1).trim();
+            return key.split("`,`");
         }
         return null;
     }

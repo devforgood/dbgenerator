@@ -30,7 +30,8 @@ public class MemberConvert {
     }
 
     static String getMenberName(ColumnObject columnObject) {
-        return Util.toLowCamelCase(columnObject.getName());
+        //return Util.toLowCamelCase(columnObject.getName());
+        return columnObject.getName();
     }
 
 
